@@ -2,8 +2,6 @@
 
 namespace App\Providers;
 
-use App\Models\Game;
-use App\Models\Post;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Http\Request;
@@ -37,9 +35,6 @@ class RouteServiceProvider extends ServiceProvider
 
             Route::middleware('web')
                 ->group(base_path('routes/web.php'));
-
-            Route::model('games', Game::class);    
-            Route::model('posts', Post::class);
         });
     }
 
