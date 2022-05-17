@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use GeneaLabs\NovaFileUploadField\FileUpload;
 use BayAreaWebPro\NovaFieldCkEditor\CkEditor;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
@@ -49,7 +50,14 @@ class Game extends Resource
             ID::make(__('ID'), 'id')->sortable(),
             Text::make('Name')->sortable(),
             Text::make('Slug')->sortable(),
-            CkEditor::make('Description')->hideFromIndex(),            
+            CkEditor::make('Description')->hideFromIndex(), 
+            FileUpload::make("Poster")
+                ->thumbnail(function ($image) {
+                    return $image
+                        ? asset('storage/'.$image)
+                        : '';
+                })
+                ->prunable()           
             ];
     }
 
